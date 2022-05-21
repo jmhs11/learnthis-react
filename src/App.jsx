@@ -1,44 +1,30 @@
-import { useState } from 'react';
-import './App.css';
+import Title from './components/Title';
+import UsersList from './components/UsersList';
 
-function App() {
-	const [count, setCount] = useState(0);
+const USERS = [
+	{
+		name: 'Juan',
+		active: true,
+		role: 'teacher'
+	},
+	{
+		name: 'Pablo',
+		active: false,
+		role: 'student'
+	},
+	{
+		name: 'Jose',
+		active: true,
+		role: 'other'
+	}
+];
 
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src='/logo.svg' className='App-logo' alt='logo' />
-				<p>Hello Vite + React!</p>
-				<p>
-					<button type='button' onClick={() => setCount(count => count + 1)}>
-						count is: {count}
-					</button>
-				</p>
-				<p>
-					Edit <code>App.jsx</code> and save to test HMR updates.
-				</p>
-				<p>
-					<a
-						className='App-link'
-						href='https://reactjs.org'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Learn React
-					</a>
-					{' | '}
-					<a
-						className='App-link'
-						href='https://vitejs.dev/guide/features.html'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Vite Docs
-					</a>
-				</p>
-			</header>
-		</div>
-	);
-}
+const App = () => (
+	<div className='App'>
+		<UsersList users={USERS}>
+			<Title>Listado de Usuarios</Title>
+		</UsersList>
+	</div>
+);
 
 export default App;
