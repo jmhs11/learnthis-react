@@ -1,5 +1,5 @@
 import UserRow from './UserRow';
-import style from './UserRow.module.css';
+import style from './UsersList.module.css';
 
 const UsersList = ({ users, children }) => {
 	const usersRendered = users.map(user => (
