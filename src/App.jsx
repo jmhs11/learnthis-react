@@ -1,4 +1,3 @@
-import Title from './components/Title';
 import UsersList from './components/UsersList';
 
 const USERS = [
@@ -21,9 +20,7 @@ const USERS = [
 
 const App = () => (
 	<div className='App'>
-		<UsersList users={USERS}>
-			<Title>Listado de Usuarios</Title>
-		</UsersList>
+		<UsersList users={USERS}></UsersList>
 	</div>
 );
 
