@@ -1,31 +1,30 @@
-import { useState } from 'react';
 import UsersListRows from './UsersListRows';
 import style from './UsersList.module.css';
 import UsersListFilters from './UsersListFilters';
+import useFilters from '../hooks/UseFilters';
+import useUsers from '../hooks/UseUsers';
 
-const UsersList = ({ users }) => {
-	const [filters, setFilters] = useState({
-		search: '',
-		onlyActive: false,
-		sortBy: 0
-	});
+const UsersList = ({ initialUsers }) => {
+	const { search, onlyActive, sortBy, ...setFiltersFunctions } = useFilters();
+	const { users, toggleUserActive } = useUsers(initialUsers);
 
-	let usersFiltered = filterActiveUsers(users, filters.onlyActive);
-	usersFiltered = filterUsersByName(usersFiltered, filters.search);
-	usersFiltered = sortUsers(usersFiltered, filters.sortBy);
+	let usersFiltered = filterActiveUsers(users, onlyActive);
+	usersFiltered = filterUsersByName(usersFiltered, search);
+	usersFiltered = sortUsers(usersFiltered, sortBy);
 
 	return (
 		<div className={style.list}>
 			<h1>Listado de Usuarios</h1>
 			<UsersListFilters
-				search={filters.search}
-				setSearch={search => setFilters({ ...filters, search })}
-				onlyActive={filters.onlyActive}
-				setOnlyActive={onlyActive => setFilters({ ...filters, onlyActive })}
-				sortBy={filters.sortBy}
-				setSortBy={sortBy => setFilters({ ...filters, sortBy })}
+				search={search}
+				onlyActive={onlyActive}
+				sortBy={sortBy}
+				{...setFiltersFunctions}
 			/>
-			<UsersListRows users={usersFiltered} />
+			<UsersListRows
+				users={usersFiltered}
+				toggleUserActive={toggleUserActive}
+			/>
 		</div>
 	);
 };
